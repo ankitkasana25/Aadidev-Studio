@@ -6,8 +6,6 @@ export default function GalleryPage() {
       <p className="text-foreground/70 mb-6">
         Explore our full collection of premium marble and stone work.
       </p>
-
-      <GalleryPage />
     </main>
   );
 }

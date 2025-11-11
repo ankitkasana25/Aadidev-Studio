@@ -9,36 +9,38 @@ const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
 
+  // ✅ Product page routes
   const marbleProducts = [
-    "Outdoor Temples",
-    "Indoor Temples",
-    "Handicraft Items",
-    "Tile Crafting",
-    "Marble Statues",
-    "Garden Ornaments",
-    "Countertops & Surfaces",
-    "Wall Cladding",
-    "Custom Stone Work",
-    "Marble Flooring",
+    { label: "Outdoor Temples", slug: "outdoor-temples" },
+    { label: "Indoor Temples", slug: "indoor-temples" },
+    { label: "Handicraft Items", slug: "handicraft-items" },
+    { label: "Tile Crafting", slug: "tile-crafting" },
+    { label: "Marble Statues", slug: "marble-statues" },
+    { label: "Garden Ornaments", slug: "garden-ornaments" },
+    { label: "Countertops & Surfaces", slug: "countertops-surfaces" },
+    { label: "Wall Cladding", slug: "wall-cladding" },
+    { label: "Custom Stone Work", slug: "custom-stone-work" },
+    { label: "Marble Flooring", slug: "marble-flooring" },
   ];
 
+  // ✅ Real page links
   const navItems = [
-    { label: "Home", href: "#hero" },
+    { label: "Home", href: "/" },
     { label: "Gallery", href: "/gallery" },
-    { label: "Services", href: "#services" },
-    { label: "About Us", href: "#about" },
-    { label: "Contact Us", href: "#contact" },
+    { label: "Services", href: "/services" },
+    { label: "About Us", href: "/about" },
+    { label: "Contact Us", href: "/contact" },
   ];
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-border shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-26">
+          {/* Logo */}
           <Link
             href="/"
             className="flex flex-row items-center flex-shrink-0 group"
           >
-            {/* Logo */}
             <div className="relative w-28 h-28 transition-transform duration-300 group-hover:scale-105">
               <Image
                 src="/aadidev-logo.png"
@@ -49,11 +51,7 @@ const Navbar = () => {
               />
             </div>
 
-            {/* Name + Tagline */}
-            <div
-              className="flex flex-col items-center text-center opacity-0 translate-y-2 
-               animate-[fadeInUp_0.6s_ease-out_forwards]"
-            >
+            <div className="flex flex-col items-center text-center opacity-0 translate-y-2 animate-[fadeInUp_0.6s_ease-out_forwards]">
               <span className="text-xl font-bold text-primary tracking-wide group-hover:text-primary/90 transition-colors">
                 Aadidev Studio
               </span>
@@ -66,15 +64,16 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-2">
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.href}
                 href={item.href}
                 className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors duration-200"
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
 
+            {/* Products Dropdown */}
             <div className="relative group">
               <button className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors duration-200 flex items-center gap-1">
                 Products
@@ -84,30 +83,29 @@ const Navbar = () => {
                 />
               </button>
 
-              {/* Desktop Dropdown */}
               <div className="absolute left-0 mt-0 w-56 bg-white rounded-lg shadow-xl border border-border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 py-2 z-50">
-                {marbleProducts.map((product, index) => (
-                  <a
-                    key={index}
-                    href="#products"
+                {marbleProducts.map((product) => (
+                  <Link
+                    key={product.slug}
+                    href={`/products/${product.slug}`}
                     className="block px-4 py-2 text-sm text-foreground hover:bg-muted hover:text-primary transition-colors"
-                    onClick={() => setProductsOpen(false)}
                   >
-                    {product}
-                  </a>
+                    {product.label}
+                  </Link>
                 ))}
               </div>
             </div>
           </div>
 
-          {/* CTA Section */}
+          {/* CTA Desktop */}
           <div className="hidden md:flex flex-col items-center gap-3">
             <Link
-              href="#contact"
+              href="/contact"
               className="px-6 py-2 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 transition-colors shadow-md"
             >
               Get Quote
             </Link>
+
             <a
               href="tel:+917976732828"
               className="flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 transition-colors"
@@ -127,20 +125,21 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div className="md:hidden pb-4 border-t border-border">
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.href}
                 href={item.href}
                 className="block px-4 py-2 text-sm font-medium text-foreground hover:bg-muted hover:text-primary transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
 
+            {/* Mobile Products */}
             <div className="border-t border-border mt-2">
               <button
                 onClick={() => setProductsOpen(!productsOpen)}
@@ -152,20 +151,21 @@ const Navbar = () => {
                   className={productsOpen ? "rotate-180" : ""}
                 />
               </button>
+
               {productsOpen && (
                 <div className="bg-muted/30 py-1">
-                  {marbleProducts.map((product, index) => (
-                    <a
-                      key={index}
-                      href="#products"
+                  {marbleProducts.map((product) => (
+                    <Link
+                      key={product.slug}
+                      href={`/products/${product.slug}`}
                       className="block px-6 py-2 text-sm text-foreground hover:text-primary transition-colors"
                       onClick={() => {
                         setMobileMenuOpen(false);
                         setProductsOpen(false);
                       }}
                     >
-                      {product}
-                    </a>
+                      {product.label}
+                    </Link>
                   ))}
                 </div>
               )}
@@ -179,8 +179,9 @@ const Navbar = () => {
               >
                 Call: +91 79767 32828
               </a>
+
               <Link
-                href="#contact"
+                href="/contact"
                 className="block px-4 py-2 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 text-center"
                 onClick={() => setMobileMenuOpen(false)}
               >
