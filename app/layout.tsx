@@ -3,10 +3,14 @@ import type { Metadata } from "next";
 import { Geist_Mono, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
+import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
+
 const _playfairDisplay = Playfair_Display({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
+
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -40,7 +44,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`font-sans antialiased`}>{children}</body>
+      <body className="font-sans antialiased pt-24">
+        {/* ✅ Global Navbar */}
+        <Navbar />
+
+        {/* ✅ Page-specific content */}
+        {children}
+
+        {/* ✅ Global Footer */}
+        <Footer />
+      </body>
     </html>
   );
 }

@@ -1,6 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Footer from "@/components/footer";
+import Navbar from "@/components/navbar";
 
 export const metadata = {
   title: "About Us - AADIDEV Studio",
@@ -360,7 +361,6 @@ export default function AboutPage() {
           </Button>
         </div>
       </section>
-      <Footer />
     </main>
   );
 }
