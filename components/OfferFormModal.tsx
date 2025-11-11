@@ -1,6 +1,7 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
+import { addEnquiry } from "@/lib/firebaseService";
 
 interface OfferFormModalProps {
   open: boolean;
@@ -13,7 +14,42 @@ export default function OfferFormModal({
   onClose,
   selectedItem,
 }: OfferFormModalProps) {
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+
   if (!open) return null;
+
+  const handleSubmit = async () => {
+    if (!name || !phone || !message) {
+      alert("Please fill all required fields");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      await addEnquiry({
+        name,
+        phone,
+        email,
+        message,
+        selectedItem: selectedItem || undefined,
+      });
+      alert("Enquiry submitted successfully!");
+      setName("");
+      setPhone("");
+      setEmail("");
+      setMessage("");
+      onClose();
+    } catch (error) {
+      alert("Failed to submit enquiry. Try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div
@@ -24,18 +60,17 @@ export default function OfferFormModal({
     >
       <div className="bg-white/90 backdrop-blur-md p-6 rounded-xl shadow-xl w-[90%] max-w-md border border-primary/30">
         <h3 className="text-xl font-semibold mb-4 text-primary">
-          Enquiry for: {selectedItem}
+          Enquiry for: {selectedItem || "General"}
         </h3>
 
-        <form className="space-y-4">
+        <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
           <div>
             <label className="text-sm text-foreground">Name</label>
             <input
               type="text"
-              className="
-                w-full mt-1 p-3 rounded-lg border border-primary/30 
-                bg-white/70 outline-none focus:border-primary transition
-              "
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full mt-1 p-3 rounded-lg border border-primary/30 bg-white/70 outline-none focus:border-primary transition"
               placeholder="Enter your name"
             />
           </div>
@@ -44,21 +79,30 @@ export default function OfferFormModal({
             <label className="text-sm text-foreground">Phone Number</label>
             <input
               type="tel"
-              className="
-                w-full mt-1 p-3 rounded-lg border border-primary/30 
-                bg-white/70 outline-none focus:border-primary transition
-              "
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              className="w-full mt-1 p-3 rounded-lg border border-primary/30 bg-white/70 outline-none focus:border-primary transition"
               placeholder="Enter your mobile number"
+            />
+          </div>
+
+          <div>
+            <label className="text-sm text-foreground">Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full mt-1 p-3 rounded-lg border border-primary/30 bg-white/70 outline-none focus:border-primary transition"
+              placeholder="Enter your email"
             />
           </div>
 
           <div>
             <label className="text-sm text-foreground">Message</label>
             <textarea
-              className="
-                w-full mt-1 p-3 rounded-lg border border-primary/30 
-                bg-white/70 outline-none focus:border-primary transition
-              "
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              className="w-full mt-1 p-3 rounded-lg border border-primary/30 bg-white/70 outline-none focus:border-primary transition"
               rows={3}
               placeholder="Write your message..."
             ></textarea>
@@ -66,12 +110,11 @@ export default function OfferFormModal({
 
           <button
             type="button"
-            className="
-              w-full bg-primary text-primary-foreground p-3 rounded-lg 
-              font-medium hover:bg-primary/90 transition
-            "
+            onClick={handleSubmit}
+            className="w-full bg-primary text-primary-foreground p-3 rounded-lg font-medium hover:bg-primary/90 transition"
+            disabled={loading}
           >
-            Submit
+            {loading ? "Submitting..." : "Submit"}
           </button>
         </form>
 
