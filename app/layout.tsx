@@ -1,13 +1,16 @@
-import type React from "react"
-import type { Metadata } from "next"
-import { Geist_Mono, Playfair_Display } from "next/font/google"
-import "./globals.css"
+import type React from "react";
+import type { Metadata } from "next";
+import { Geist_Mono, Playfair_Display } from "next/font/google";
+import "./globals.css";
 
-const _playfairDisplay = Playfair_Display({ subsets: ["latin"], weight: ["400", "500", "600", "700"] })
-const _geistMono = Geist_Mono({ subsets: ["latin"] })
+const _playfairDisplay = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "AADIDEV STUDIO - Premium Marble Temples & Stone Craftsmanship",
+  title: "Aadived Studio",
   description:
     "Luxury marble temples, divine sculptures, and custom stone art by AADIDEV STUDIO. Serving 8 countries with 500+ projects of exquisite marble craftsmanship.",
   generator: "v0.app",
@@ -28,16 +31,16 @@ export const metadata: Metadata = {
     ],
     apple: "/apple-icon.png",
   },
-}
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
     <html lang="en">
       <body className={`font-sans antialiased`}>{children}</body>
     </html>
-  )
+  );
 }
