@@ -16,7 +16,6 @@ import WhatOurClientsSay from "@/components/WhatOurClientsSay";
 export default function Home() {
   return (
     <main>
-      <Navbar />
       <HeroSection />
       <WhatWeSell />
       <CategoriesGrid />
@@ -26,7 +25,6 @@ export default function Home() {
       <BlogSection />
       <WhatOurClientsSay />
       <ContactSection />
-      <Footer />
       <FloatingWhatsApp />
       <BackToTop />
     </main>
