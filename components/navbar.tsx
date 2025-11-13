@@ -4,10 +4,12 @@ import { useState } from "react";
 import Link from "next/link";
 import { Menu, X, ChevronDown, Phone } from "lucide-react";
 import Image from "next/image";
+import OfferFormModal from "./OfferFormModal";
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   // ✅ Product page routes
   const marbleProducts = [
@@ -31,6 +33,10 @@ const Navbar = () => {
     { label: "About Us", href: "/about" },
     { label: "Contact Us", href: "/contact" },
   ];
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/70 backdrop-blur-lg border-b border-border shadow-md">
@@ -99,12 +105,12 @@ const Navbar = () => {
 
           {/* CTA Desktop */}
           <div className="hidden md:flex flex-col items-center gap-3">
-            <Link
-              href="/contact"
+            <button
+              onClick={() => handleOpen()}
               className="px-6 py-2 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 transition-colors shadow-md"
             >
               Get Quote
-            </Link>
+            </button>
 
             <a
               href="tel:+917976732828"
@@ -191,6 +197,7 @@ const Navbar = () => {
           </div>
         )}
       </div>
+      <OfferFormModal open={open} onClose={() => setOpen(false)} />
     </nav>
   );
 };

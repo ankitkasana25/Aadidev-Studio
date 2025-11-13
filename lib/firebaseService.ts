@@ -3,10 +3,10 @@ import { db } from "./firebase";
 import { ref, push } from "firebase/database";
 
 export interface EnquiryData {
-  name: string;
-  phone: string;
+  name?: string;
+  phone?: string;
   email?: string;
-  message: string;
+  message?: string;
   selectedItem?: string;
 }
 
