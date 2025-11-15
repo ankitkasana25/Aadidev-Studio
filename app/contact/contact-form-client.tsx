@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/form";
 import { Card } from "@/components/ui/card";
 import { CheckCircle2, Send } from "lucide-react";
+import { addEnquiry } from "@/lib/firebaseService";
 
 const formSchema = z.object({
   fullName: z
@@ -62,15 +63,17 @@ export function ContactFormClient() {
 
   async function onSubmit(data: FormValues) {
     setIsSubmitting(true);
-    console.log("[v0] Form submitted with data:", data);
 
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      await addEnquiry({
+        name: data.fullName,
+        email: data.email,
+        phone: data.phone,
+        message: `Project Type: ${data.projectType}\nBudget: ${data.budget || "Not specified"}\nTimeline: ${data.timeline || "Not specified"}\nCompany: ${data.company || "Not specified"}\n\nDescription:\n${data.description}`,
+        selectedItem: data.projectType,
+      });
 
-      console.log("[v0] Form submission successful");
       setSubmitSuccess(true);
-
       form.reset();
 
       // Reset success message after 5 seconds
@@ -78,7 +81,12 @@ export function ContactFormClient() {
         setSubmitSuccess(false);
       }, 5000);
     } catch (error) {
-      console.log("[v0] Form submission error:", error);
+      console.error("Form submission error:", error);
+      // Show error message to user
+      form.setError("root", {
+        type: "manual",
+        message: "Failed to submit form. Please try again or contact us directly.",
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -321,6 +329,11 @@ export function ContactFormClient() {
             <p className="text-xs text-muted-foreground mt-3">
               We'll respond within 24 business hours with a personalized quote.
             </p>
+            {form.formState.errors.root && (
+              <p className="text-destructive text-sm mt-2">
+                {form.formState.errors.root.message}
+              </p>
+            )}
           </div>
         </form>
       </Form>

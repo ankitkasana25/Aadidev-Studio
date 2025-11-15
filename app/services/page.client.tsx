@@ -4,8 +4,6 @@ import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
-import Footer from "@/components/footer";
-import Navbar from "@/components/navbar";
 
 const serviceCategories = [
   {

@@ -1,10 +1,18 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   typescript: {
-    ignoreBuildErrors: true,
+    // Remove ignoreBuildErrors to catch TypeScript issues
+    ignoreBuildErrors: false,
   },
   images: {
-    unoptimized: true,
+    // Enable image optimization for better performance
+    unoptimized: false,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.pexels.com',
+      },
+    ],
   },
 }
 

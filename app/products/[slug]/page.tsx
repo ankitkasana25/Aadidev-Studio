@@ -4,7 +4,7 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface Product {
   label: string;
@@ -136,22 +136,63 @@ const products: Record<string, Product> = {
   },
 };
 
-const generateProductImages = (productName: string) => {
-  const baseQueries = [
-    `premium marble ${productName} showcase luxury`,
-    `beautiful marble ${productName} artistic craftsmanship`,
-    `elegant stone ${productName} detailed carving`,
-    `luxury marble ${productName} architectural design`,
-    `handcrafted marble ${productName} premium quality`,
-    `marble ${productName} intricate patterns`,
-    `stone ${productName} classic elegance`,
-    `marble ${productName} artistic creation`,
-  ];
+const getProductImages = (slug: string): string[] => {
+  const imageMap: Record<string, string[]> = {
+    "outdoor-temples": [
+      "/outdoor-marble-temple.jpg",
+      "/marble-temple-completed.jpg",
+      "/marble-temple-architecture.jpg",
+      "/marble-temple-design.jpg",
+      "/ornate-marble-temple-with-gold-accents-and-spiritu.jpg",
+      "/white-marble-temple-architecture-with-intricate-ca.jpg",
+    ],
+    "indoor-temples": [
+      "/indoor-marble-temple.jpg",
+      "/indoor-marble-temple-with-intricate-carved-details.jpg",
+      "/marble-krishna-temple.jpg",
+      "/marble-ram-mandir-temple.jpg",
+    ],
+    "handicraft-items": [
+      "/marble-handicraft-items.jpg",
+      "/marble-handicraft-items-decorative-stone-art-piece.jpg",
+      "/marble-custom-stonework.jpg",
+    ],
+    "tile-crafting": [
+      "/marble-tile-crafting.jpg",
+      "/marble-flooring-tiles-beautiful-stone-pattern-desi.jpg",
+    ],
+    "marble-statues": [
+      "/marble-deity-statue.jpg",
+      "/marble-ganesha-sculpture.jpg",
+      "/marble-nandi-bull.jpg",
+      "/marble-goddess-durga-idol.jpg",
+      "/white-marble-lord-shiva-idol.jpg",
+      "/marble-idol-carving.jpg",
+    ],
+    "garden-ornaments": [
+      "/marble-garden-ornaments.jpg",
+      "/outdoor-marble-sculpture-garden-ornaments-landscap.jpg",
+    ],
+    "countertops-surfaces": [
+      "/marble-countertops.jpg",
+      "/marble-countertops-kitchen-premium-stone-surfaces.jpg",
+    ],
+    "wall-cladding": [
+      "/marble-wall-cladding.jpg",
+      "/marble-wall-cladding-luxury-interior-stone-design.jpg",
+    ],
+    "custom-stone-work": [
+      "/marble-custom-stonework.jpg",
+      "/custom-stone-artwork-religious-spiritual-marble-ca.jpg",
+      "/artisans-working-on-marble-sculpture.jpg",
+    ],
+    "marble-flooring": [
+      "/marble-flooring.jpg",
+      "/marble-flooring-tiles-beautiful-stone-pattern-desi.jpg",
+    ],
+  };
 
-  return baseQueries.map((query, index) => ({
-    id: index + 1,
-    query: query,
-  }));
+  return imageMap[slug] || ["/placeholder.jpg"];
 };
 
 export default function ProductPage() {
@@ -161,6 +202,13 @@ export default function ProductPage() {
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(
     null
   );
+
+  // Update page title dynamically
+  useEffect(() => {
+    if (product) {
+      document.title = `${product.label} - AADIDEV Studio`;
+    }
+  }, [product]);
 
   if (!product) {
     return (
@@ -178,7 +226,12 @@ export default function ProductPage() {
     );
   }
 
-  const images = generateProductImages(product.label.toLowerCase());
+  const imagePaths = getProductImages(slug);
+  const images = imagePaths.map((path, index) => ({
+    id: index + 1,
+    src: path,
+    alt: `${product.label} - Image ${index + 1}`,
+  }));
 
   const handlePrev = () => {
     if (selectedImageIndex !== null) {
@@ -254,21 +307,17 @@ export default function ProductPage() {
                 }`}
               >
                 <Image
-                  src={`/generic-placeholder-icon.png?height=${
-                    index === 0 ? 384 : index === 1 ? 256 : 224
-                  }&width=${
-                    index === 0 ? 384 : index === 1 ? 512 : 280
-                  }&query=${encodeURIComponent(image.query)}`}
-                  alt={`${product.label} - ${image.id}`}
+                  src={image.src}
+                  alt={image.alt}
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 />
               </div>
 
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-end justify-start p-4">
                 <div className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <p className="font-semibold text-sm">Item #{image.id}</p>
-                  <p className="text-xs text-gray-200">{product.label}</p>
+                  <p className="font-semibold text-sm">{image.alt}</p>
                 </div>
               </div>
             </div>
@@ -323,12 +372,11 @@ export default function ProductPage() {
             {/* Large Image */}
             <div className="relative w-full h-[70vh] flex items-center justify-center">
               <Image
-                src={`/generic-placeholder-icon.png?height=800&width=1200&query=${encodeURIComponent(
-                  images[selectedImageIndex].query
-                )}`}
-                alt={`Large view ${selectedImageIndex}`}
+                src={images[selectedImageIndex].src}
+                alt={images[selectedImageIndex].alt}
                 fill
                 className="object-contain rounded-lg"
+                sizes="100vw"
               />
             </div>
 

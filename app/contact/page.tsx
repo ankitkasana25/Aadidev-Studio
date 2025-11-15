@@ -1,13 +1,17 @@
-import Footer from "@/components/footer";
 import { ContactFormClient } from "./contact-form-client";
 import { Card } from "@/components/ui/card";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
-import Navbar from "@/components/navbar";
 
 export const metadata = {
-  title: "Contact Us - AADIDEV Studio",
+  title: "Contact Us - AADIDEV Studio | Get Your Custom Quote",
   description:
-    "Get in touch with AADIDEV Studio for your custom marble and stone projects. We're here to help bring your vision to life.",
+    "Get in touch with AADIDEV Studio for your custom marble and stone projects. We're here to help bring your vision to life. Call +91 79767 32828 or fill out our contact form.",
+  keywords: [
+    "contact Aadidev Studio",
+    "marble temple quote",
+    "custom stone work",
+    "marble consultation",
+  ],
 };
 
 export default function ContactPage() {

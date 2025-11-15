@@ -13,46 +13,62 @@ const CategoryDetail = ({ categoryId, categoryName }: CategoryDetailProps) => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
 
   const categoryImages: Record<string, string[]> = {
-    "outdoor-temples": Array.from(
-      { length: 50 },
-      (_, i) => `/outdoor-temple-${i + 1}.jpg`
-    ),
-    "indoor-temples": Array.from(
-      { length: 50 },
-      (_, i) => `/indoor-temple-${i + 1}.jpg`
-    ),
-    "handicraft-items": Array.from(
-      { length: 50 },
-      (_, i) => `/handicraft-item-${i + 1}.jpg`
-    ),
-    "tile-crafting": Array.from(
-      { length: 50 },
-      (_, i) => `/marble-tile-${i + 1}.jpg`
-    ),
-    "marble-statues": Array.from(
-      { length: 50 },
-      (_, i) => `/marble-statue-${i + 1}.jpg`
-    ),
-    "garden-ornaments": Array.from(
-      { length: 50 },
-      (_, i) => `/garden-ornament-${i + 1}.jpg`
-    ),
-    "countertops-surfaces": Array.from(
-      { length: 50 },
-      (_, i) => `/countertop-${i + 1}.jpg`
-    ),
-    "wall-cladding": Array.from(
-      { length: 50 },
-      (_, i) => `/wall-cladding-${i + 1}.jpg`
-    ),
-    "custom-stone-work": Array.from(
-      { length: 50 },
-      (_, i) => `/custom-stonework-${i + 1}.jpg`
-    ),
-    "marble-flooring": Array.from(
-      { length: 50 },
-      (_, i) => `/marble-floor-${i + 1}.jpg`
-    ),
+    "outdoor-temples": [
+      "/outdoor-marble-temple.jpg",
+      "/marble-temple-completed.jpg",
+      "/marble-temple-architecture.jpg",
+      "/marble-temple-design.jpg",
+      "/ornate-marble-temple-with-gold-accents-and-spiritu.jpg",
+      "/white-marble-temple-architecture-with-intricate-ca.jpg",
+    ],
+    "indoor-temples": [
+      "/indoor-marble-temple.jpg",
+      "/indoor-marble-temple-with-intricate-carved-details.jpg",
+      "/marble-krishna-temple.jpg",
+      "/marble-ram-mandir-temple.jpg",
+    ],
+    "handicraft-items": [
+      "/marble-handicraft-items.jpg",
+      "/marble-handicraft-items-decorative-stone-art-piece.jpg",
+      "/marble-custom-stonework.jpg",
+    ],
+    "tile-crafting": [
+      "/marble-tile-crafting.jpg",
+      "/marble-flooring-tiles-beautiful-stone-pattern-desi.jpg",
+    ],
+    "marble-statues": [
+      "/marble-deity-statue.jpg",
+      "/marble-ganesha-sculpture.jpg",
+      "/marble-nandi-bull.jpg",
+      "/marble-goddess-durga-idol.jpg",
+      "/white-marble-lord-shiva-idol.jpg",
+      "/marble-idol-carving.jpg",
+      "/marble-sculpture-art.jpg",
+      "/white-marble-sculpture.jpg",
+    ],
+    "garden-ornaments": [
+      "/marble-garden-ornaments.jpg",
+      "/outdoor-marble-sculpture-garden-ornaments-landscap.jpg",
+    ],
+    "countertops-surfaces": [
+      "/marble-countertops.jpg",
+      "/marble-countertops-kitchen-premium-stone-surfaces.jpg",
+    ],
+    "wall-cladding": [
+      "/marble-wall-cladding.jpg",
+      "/marble-wall-cladding-luxury-interior-stone-design.jpg",
+    ],
+    "custom-stone-work": [
+      "/marble-custom-stonework.jpg",
+      "/custom-stone-artwork-religious-spiritual-marble-ca.jpg",
+      "/artisans-working-on-marble-sculpture.jpg",
+      "/marble-relief-carving.jpg",
+      "/marble-statue-carving-artisan-working-on-spiritual.jpg",
+    ],
+    "marble-flooring": [
+      "/marble-flooring.jpg",
+      "/marble-flooring-tiles-beautiful-stone-pattern-desi.jpg",
+    ],
   };
 
   const images = (categoryImages[categoryId] || []).map((url, i) => ({

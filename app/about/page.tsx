@@ -1,12 +1,16 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import Footer from "@/components/footer";
-import Navbar from "@/components/navbar";
 
 export const metadata = {
-  title: "About Us - AADIDEV Studio",
+  title: "About Us - AADIDEV Studio | 25+ Years of Excellence",
   description:
-    "Discover our heritage, craftsmanship, and vision for luxury stone artistry",
+    "Discover our heritage, craftsmanship, and vision for luxury stone artistry. AADIDEV Studio - 25+ years of experience, 500+ projects, serving 8 countries.",
+  keywords: [
+    "Aadidev Studio history",
+    "marble craftsmanship",
+    "stone artistry",
+    "heritage stone work",
+  ],
 };
 
 export default function AboutPage() {

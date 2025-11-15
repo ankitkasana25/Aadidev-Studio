@@ -14,10 +14,36 @@ const _playfairDisplay = Playfair_Display({
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Aadived Studio",
+  title: "Aadidev Studio - Luxury Marble Temples & Stone Art",
   description:
     "Luxury marble temples, divine sculptures, and custom stone art by AADIDEV STUDIO. Serving 8 countries with 500+ projects of exquisite marble craftsmanship.",
-  generator: "v0.app",
+  keywords: [
+    "marble temples",
+    "stone sculptures",
+    "marble statues",
+    "custom stone work",
+    "marble flooring",
+    "handicraft items",
+    "marble countertops",
+    "stone art",
+    "Aadidev Studio",
+    "Makrana marble",
+  ],
+  authors: [{ name: "Aadidev Studio" }],
+  openGraph: {
+    title: "Aadidev Studio - Luxury Marble Temples & Stone Art",
+    description:
+      "Luxury marble temples, divine sculptures, and custom stone art. Serving 8 countries with 500+ projects of exquisite marble craftsmanship.",
+    type: "website",
+    locale: "en_IN",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Aadidev Studio - Luxury Marble Temples & Stone Art",
+    description:
+      "Luxury marble temples, divine sculptures, and custom stone art. Serving 8 countries with 500+ projects.",
+  },
+  generator: "Next.js",
   icons: {
     icon: [
       {

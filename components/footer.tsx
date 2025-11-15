@@ -4,12 +4,12 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 
 const SOCIAL_ICONS = [
-  { name: "LinkedIn", href: "#", icon: "in" },
-  { name: "Instagram", href: "#", icon: "📷" },
-  { name: "Facebook", href: "#", icon: "f" },
-  { name: "YouTube", href: "#", icon: "▶" },
-  { name: "WhatsApp", href: "#", icon: "💬" },
-  { name: "X", href: "#", icon: "𝕏" },
+  { name: "LinkedIn", href: "https://www.linkedin.com/company/aadidev-studio", icon: "in" },
+  { name: "Instagram", href: "https://www.instagram.com/aadidevstudio", icon: "📷" },
+  { name: "Facebook", href: "https://www.facebook.com/aadidevstudio", icon: "f" },
+  { name: "YouTube", href: "https://www.youtube.com/@aadidevstudio", icon: "▶" },
+  { name: "WhatsApp", href: "https://wa.me/917976732828", icon: "💬" },
+  { name: "X", href: "https://twitter.com/aadidevstudio", icon: "𝕏" },
 ];
 
 const NAVIGATION_ITEMS = [
@@ -21,11 +21,11 @@ const NAVIGATION_ITEMS = [
 ];
 
 const QUICK_LINKS = [
-  "Disclaimer",
-  "Feedback Form",
-  "Privacy Policy",
-  "Customer Grievances",
-  "Terms & Conditions",
+  { label: "Disclaimer", href: "/disclaimer" },
+  { label: "Feedback Form", href: "/contact" },
+  { label: "Privacy Policy", href: "/privacy-policy" },
+  { label: "Customer Grievances", href: "/contact" },
+  { label: "Terms & Conditions", href: "/terms" },
 ];
 
 export default function Footer() {
@@ -107,7 +107,7 @@ export default function Footer() {
                     className="text-2xl font-black tracking-wider text-[#baf3cf] uppercase"
                     style={{ fontFamily: "'Gochi Hand', cursive" }}
                   >
-                    Adidev Studio
+                    Aadidev Studio
                   </h2>
                   <p
                     className="text-lg text-[#baf3cf] opacity-95"
@@ -192,13 +192,13 @@ export default function Footer() {
                     }`}
                     style={{ transitionDelay: `${0.25 + index * 0.08}s` }}
                   >
-                    <a
-                      href="#"
+                    <Link
+                      href={item.href}
                       className="text-lg text-white opacity-90 hover:opacity-100 hover:text-[#baf3cf] transition-all duration-300"
                       style={{ fontFamily: "'Gochi Hand', cursive" }}
                     >
-                      {item}
-                    </a>
+                      {item.label}
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -281,7 +281,7 @@ export default function Footer() {
               className="text-base text-white/[0.78] text-center mb-8"
               style={{ fontFamily: "'Gochi Hand', cursive" }}
             >
-              © {year} Adidev Studio. All rights reserved.
+              © {year} Aadidev Studio. All rights reserved.
             </p>
           </div>
 
