@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { X } from "lucide-react"
+import Link from "next/link"
 
 const GallerySection = () => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null)
@@ -19,7 +20,9 @@ const GallerySection = () => {
     <section id="gallery" className="py-16 bg-secondary/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-primary mb-3">Our Gallery</h2>
+          <Link href="/gallery" className="inline-block">
+            <h2 className="text-4xl font-bold text-primary mb-3 hover:text-primary/80 transition-colors">Our Gallery</h2>
+          </Link>
           <p className="text-lg text-foreground/70">Showcase of our finest marble creations</p>
         </div>
 

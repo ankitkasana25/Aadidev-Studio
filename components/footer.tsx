@@ -13,11 +13,11 @@ const SOCIAL_ICONS = [
 ];
 
 const NAVIGATION_ITEMS = [
-  "Home",
-  "Gallery",
-  "About Us",
-  "Contact Us",
-  "Location",
+  { label: "Home", path: "/" },
+  { label: "Gallery", path: "/gallery" },
+  { label: "About Us", path: "/about" },
+  { label: "Contact Us", path: "/contact" },
+  { label: "Location", path: "/location" },
 ];
 
 const QUICK_LINKS = [
@@ -154,11 +154,11 @@ export default function Footer() {
                     style={{ transitionDelay: `${0.15 + index * 0.08}s` }}
                   >
                     <Link
-                      href={`/${item.toLowerCase().replace(/\s+/g, "")}`}
+                      href={item.path}
                       className="text-lg text-white opacity-90 hover:opacity-100 hover:text-[#baf3cf] transition-all duration-300 transform hover:translate-x-1"
                       style={{ fontFamily: "'Gochi Hand', cursive" }}
                     >
-                      {item}
+                      {item.label}
                     </Link>
                   </li>
                 ))}

@@ -106,7 +106,7 @@ const HeroSection = () => {
           </h1>
           <p className="text-xl md:text-2xl mb-8 drop-shadow-md">{slides[currentSlide].subtitle}</p>
           <Link
-            href="#products"
+            href="/gallery"
             className="px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 transition-all shadow-lg inline-block"
           >
             Explore Products
